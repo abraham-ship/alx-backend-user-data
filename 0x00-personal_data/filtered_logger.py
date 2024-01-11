@@ -5,7 +5,7 @@ from typing import List
 import logging
 from logging import StreamHandler
 import os
-import mysql.connector
+from mysql.connector import connection
 
 
 class RedactingFormatter(logging.Formatter):
@@ -58,10 +58,10 @@ def get_db() -> connection.MySQLConnection:
     db_host = os.environ.get('PERSONAL_DATA_DB_HOST', 'localhost')
     db_name = os.environ.get('PERSONAL_DATA_DB_NAME')
 
-    connection = mysql.connector.connect(
+    connect = connection.MySQLConnection(
             user=db_username,
             password=db_password,
             host=db_host,
             database=db_name
             )
-    return connection
+    return connect
