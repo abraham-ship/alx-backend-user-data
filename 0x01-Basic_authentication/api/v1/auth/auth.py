@@ -4,6 +4,7 @@ API authentication.
 '''
 from flask import request
 from typing import List, TypeVar
+from os import getenv
 
 
 if getenv("AUTH_TYPE") == 'basic_auth':
