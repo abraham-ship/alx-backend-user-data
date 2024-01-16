@@ -2,10 +2,16 @@
 '''
 API authentication.
 '''
-
-
 from flask import request
 from typing import List, TypeVar
+
+
+if getenv("AUTH_TYPE") == 'basic_auth':
+    from api.v1.auth.basic_auth import BasicAuth
+    auth = BasicAuth()
+else:
+    from api.v1.auth.auth import Auth
+    auth = Auth()
 
 
 class Auth():
@@ -22,6 +28,8 @@ class Auth():
         '''authorization header'''
         if request is None or "Authorization" not in request:
             return None
+        else:
+            return request.headers['Authorization']
 
     def current_user(self, request=None) -> TypeVar('User'):
         '''current user'''
