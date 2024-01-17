@@ -19,6 +19,9 @@ auth = None
 if getenv("AUTH_TYPE") == 'basic_auth':
     from api.v1.auth.basic_auth import BasicAuth
     auth = BasicAuth()
+if getenv("AUTH_TYPE") == 'session_auth':
+    from api.v1.auth.session_auth import SessionAuth
+    auth = SessionAuth()
 else:
     from api.v1.auth.auth import Auth
     auth = Auth()
@@ -30,11 +33,13 @@ def filter_request() -> None:
     excluded_paths = [
             '/api/v1/status/',
             '/api/v1/unauthorized/',
-            '/api/v1/forbidden/'
+            '/api/v1/forbidden/',
+            '/api/v1/auth_session/login/'
             ]
     if auth:
         if auth.require_auth(request.path, excluded_paths):
-            if auth.authorization_header(request) is None:
+            if auth.authorization_header(request) is None and
+            auth.session_cookie(request) is None:
                 abort(401)
             if auth.current_user(request) is None:
                 abort(403)
