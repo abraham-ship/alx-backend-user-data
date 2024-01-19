@@ -40,7 +40,7 @@ def session_login() -> str:
 
 @app_views.route('/auth_session/logout', methods=['DELETE'],
                  strict_slashes=False)
-def session_logout() -> str:
+def session_logout():
     '''DELETE /api/v1/auth_session/logout
     Return
     - an empty JSON dictionary with the status code 200'''
