@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 '''view that handles all routes for the Session authentication'''
+from api.v1.views import app_views
+from flask import abort, jsonify, request
+from os import getenv
+from models.user import User
 
 
 @app_views.route('/auth_session/login' methods=["POST"], strict_slashes=False)
