@@ -3,6 +3,7 @@
 import bcrypt
 from user import User
 from db import DB
+from uuid import uuid4
 
 
 def _generate_uuid() -> str:
@@ -12,7 +13,7 @@ def _generate_uuid() -> str:
     return str(uuid4())
 
 
-def _hash_password(self, password: str) -> bytes:
+def _hash_password(password: str) -> str:
     '''Hash the input password with salt using bcrypt.hashpw
     Args:
     password (str): input passsword
