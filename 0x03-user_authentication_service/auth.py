@@ -52,3 +52,10 @@ class Auth:
         user = self._db.find_user_by(email=email)
         return bcrypt.checkpw(password.encode('utf-8'),
                               user.hashed_password.encode('utf-8'))
+
+    def _generate_uuid() -> str:
+        '''Generate UUIDs
+        Return:
+           string representation of a new UUID '''
+        new_uuid = uuid.uuid4()
+        return str(new_uuid)
