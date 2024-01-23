@@ -5,6 +5,24 @@ from user import User
 from db import DB
 
 
+def _generate_uuid() -> str:
+    '''Generate UUIDs
+    Return:
+        string representation of a new UUID '''
+    return str(uuid4())
+
+
+def _hash_password(self, password: str) -> bytes:
+    '''Hash the input password with salt using bcrypt.hashpw
+    Args:
+    password (str): input passsword
+    Return:
+        bytes: The salted hash of the input password'''
+    salt = bcrypt.gensalt()
+    hash_password = bcrypt.hashpw(password.encode('utf-8'), salt=salt)
+    return hash_password
+
+
 class Auth:
     """Auth class to interact with the authentication database.
     """
@@ -52,10 +70,3 @@ class Auth:
         user = self._db.find_user_by(email=email)
         return bcrypt.checkpw(password.encode('utf-8'),
                               user.hashed_password.encode('utf-8'))
-
-    def _generate_uuid() -> str:
-        '''Generate UUIDs
-        Return:
-           string representation of a new UUID '''
-        new_uuid = uuid.uuid4()
-        return str(new_uuid)
