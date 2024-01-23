@@ -20,7 +20,7 @@ def _hash_password(password: str) -> str:
     Return:
         bytes: The salted hash of the input password'''
     salt = bcrypt.gensalt()
-    hash_password = bcrypt.hashpw(password.encode('utf-8'), salt=salt)
+    hash_password = bcrypt.hashpw(password.encode('utf-8'), salt)
     return hash_password
 
 
