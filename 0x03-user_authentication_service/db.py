@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """DB module
 """
 from sqlalchemy.orm.exc import NoResultFound, InvalidRequestError
