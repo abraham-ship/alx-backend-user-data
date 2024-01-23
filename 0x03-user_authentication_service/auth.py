@@ -14,7 +14,7 @@ class Auth:
         """
         self._db = DB()
 
-    def _hash_password(password: str) -> bytes:
+    def _hash_password(self, password: str) -> bytes:
         '''Hash the input password with salt using bcrypt.hashpw
         Args:
             password (str): input passsword
@@ -24,10 +24,10 @@ class Auth:
         hash_password = bcrypt.hashpw(password.encode('utf-8'), salt=salt)
         return hash_password
 
-    def register_user(email: str, password: str) -> User:
+    def register_user(self, email: str, password: str) -> User:
         '''register a new user
         Args:
-            email (str): user wmail
+            email (str): user email
             password (str): user password
         Returns:
             User: The registered User object
@@ -41,3 +41,14 @@ class Auth:
         new_user = self._db.add_user(email=email,
                                      hashed_password=hashed_password)
         return new_user
+
+    def valid_login(self, email: str, password: str) -> bool:
+        '''try to locate a user by email and validate with password
+        Agrs:
+            email (str): user email
+            password (str): user password
+        Returns:
+            True if match is found otherwise False'''
+        user = self._db.find_user_by(email=email)
+        return bcrypt.checkpw(password.encode('utf-8'),
+                              user.hashed_password.encode('utf-8'))
