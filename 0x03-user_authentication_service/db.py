@@ -44,11 +44,11 @@ class DB:
         try:
             query = self._session.query(User).filter_by(**kwargs)
             user = query.first()
-            return user
         except NoResultFound:
             raise
         except InvalidRequestError:
             raise
+        return user
 
     def update_user(self, user_id: int, **kwargs) -> None:
         '''Update user attributes based on input arguments
@@ -66,3 +66,4 @@ class DB:
             raise
         except InvalidRequestError:
             raise
+        return None
