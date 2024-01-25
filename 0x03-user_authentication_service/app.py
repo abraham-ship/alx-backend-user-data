@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 '''flask app'''
-from flask import Flask
+from flask import Flask, jsonify
 from auth import Auth
 
 app = Flask(__name__)
 AUTH = Auth()
 
 
-@app.route('/', strict_slashes=False)
+@app.route('/')
 def hello_flask():
     return jsonify({"message": "Bienvenue"})
 
