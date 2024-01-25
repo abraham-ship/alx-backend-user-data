@@ -7,10 +7,9 @@ app = Flask(__name__)
 AUTH = Auth()
 
 
-@app.route('/', methods=['GET'])
+@app.route('/')
 def hello_flask():
-    message = {"message": "Bienvenue"}
-    return flask.jsonify(message)
+    return jsonify({"message": "Bienvenue"})
 
 
 @app.route('/users', methods=['POST'], strict_slashes=False)
