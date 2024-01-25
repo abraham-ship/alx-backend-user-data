@@ -4,6 +4,7 @@ import bcrypt
 from user import User
 from db import DB
 from uuid import uuid4
+from typing import Union
 
 
 def _generate_uuid() -> str:
