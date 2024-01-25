@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 '''flask app'''
-from flask import Flask, jsonify
+from flask import Flask
 from auth import Auth
 
 app = Flask(__name__)
@@ -10,7 +10,7 @@ AUTH = Auth()
 @app.route('/', methods=['GET'])
 def hello_flask():
     message = {"message": "Bienvenue"}
-    return jsonify(message)
+    return flask.jsonify(message)
 
 
 @app.route('/users', methods=['POST'], strict_slashes=False)
