@@ -9,6 +9,7 @@ AUTH = Auth()
 
 @app.route('/')
 def hello_flask():
+    '''basic flask'''
     return jsonify({"message": "Bienvenue"})
 
 
